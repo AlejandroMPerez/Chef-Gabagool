@@ -1,7 +1,54 @@
+body {
+  background-image: url("https://images.clipartlogo.com/files/istock/previews/2879/28798886-gingham-pattern-in-red-and-white.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0;
+  padding: 0;
+}
+
 canvas {
-    /* background-image: url("/lab-canvas-race-car/images/road.png");
+    background-image: url("http://d2by9dx2k0n1tg.cloudfront.net/menus/86/86578/public.jpg?1417378702");
     background-repeat: no-repeat;
-    background-size: cover; */
+    background-size: cover; 
     border: 1px solid black;
-    margin: 0;
-  }
+    margin-top: 0;
+    margin-bottom: 1%;
+}
+
+.parent-container {
+  color: rgb(9, 79, 18);
+  font-family: sans-serif;
+  font-weight: 900;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.score-container {
+  font-size: 2rem;
+}
+
+.game-description {
+  font-size: 1.5rem;
+}
+  
+button {
+  background-color: rgb(9, 79, 18);
+  border: none;
+  text-decoration: none;
+  font-size: 1.1rem;
+  color: white;
+  padding: 15% 80%;
+  border-radius: 9999px;
+  white-space: nowrap;
+  cursor: pointer;
+} 
+
+button:hover {background-color: #3e8e41}
+
+button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
