@@ -98,10 +98,10 @@ class Enemies {
 
 
 //Player
-let player = new Player (w/2, h/2, 70, 70)
+let player = new Player (w/2, h/2, 90, 90)
 
 const playerImage = new Image();
-playerImage.src = "Images/Chef.svg"
+playerImage.src = "Images/Chef.png"
 playerImage.onload = function () {
     ctx.imageSmoothingEnabled = true;
     ctx.drawImage(playerImage, player.x, player.y, player.w, player.h)
@@ -139,43 +139,43 @@ function spawnEnemies() {
                     y = Math.random() * h;
                     angle = Math.atan2((h/2 + player.h/2) - y, (w/2 + player.w/2) - x) //Provides the angle between the enemy and the players center position
                     velocity = {
-                        x: Math.cos(angle) * 2, //Gets the velocity on the x axis.
-                        y: Math.sin(angle) * 2 //Gets the velocity on the y axis.
+                        x: Math.cos(angle) * 1.5, //Gets the velocity on the x axis.
+                        y: Math.sin(angle) * 1.5 //Gets the velocity on the y axis.
                     }
-                    enemiesArr.push(new Enemies(x, y, 30, "black", velocity))
+                    enemiesArr.push(new Enemies(x, y, 10, "black", velocity))
                 break;
             case 1:
                     x = Math.random() * w;
                     y = 0;
                     angle = Math.atan2((h/2 + player.h/2) - y, (w/2 + player.w/2) - x) //Provides the angle between the enemy and the players center position
                     velocity = {
-                        x: Math.cos(angle), //Gets the velocity on the x axis.
-                        y: Math.sin(angle) //Gets the velocity on the y axis.
+                        x: Math.cos(angle) * 1.5, //Gets the velocity on the x axis.
+                        y: Math.sin(angle) * 1.5 //Gets the velocity on the y axis.
                     }
-                    enemiesArr.push(new Enemies(x, y, 30, "black", velocity))
+                    enemiesArr.push(new Enemies(x, y, 10, "black", velocity))
                 break;
             case 2:
                     x = w;
                     y = Math.random() * h;
                     angle = Math.atan2((h/2 + player.h/2) - y, (w/2 + player.w/2) - x) //Provides the angle between the enemy and the players center position
                     velocity = {
-                        x: Math.cos(angle), //Gets the velocity on the x axis.
-                        y: Math.sin(angle) //Gets the velocity on the y axis.
+                        x: Math.cos(angle) * 1.5, //Gets the velocity on the x axis.
+                        y: Math.sin(angle) * 1.5 //Gets the velocity on the y axis.
                     }
-                    enemiesArr.push(new Enemies(x, y, 30, "black", velocity))
+                    enemiesArr.push(new Enemies(x, y, 10, "black", velocity))
                 break;
             case 3:
                     x = Math.random() * w;
                     y = h;
                     angle = Math.atan2((h/2 + player.h/2) - y, (w/2 + player.w/2) - x) //Provides the angle between the enemy and the players center position
                     velocity = {
-                        x: Math.cos(angle), //Gets the velocity on the x axis.
-                        y: Math.sin(angle) //Gets the velocity on the y axis.
+                        x: Math.cos(angle) * 1.5, //Gets the velocity on the x axis.
+                        y: Math.sin(angle) * 1.5 //Gets the velocity on the y axis.
                     }
-                    enemiesArr.push(new Enemies(x, y, 30, "black", velocity))
+                    enemiesArr.push(new Enemies(x, y, 10, "black", velocity))
                 break;
         }
-    }, 2000)
+    }, 3700)
 }
 
 
@@ -220,6 +220,7 @@ function startGame() {
     }    
 }
 
+
 //Animation
 let game;
 let score = 0;
@@ -243,6 +244,7 @@ function animate() {
                 projectilesArr.splice(index, 1)
             }
     }) 
+
     
     //Enemies
     enemiesArr.forEach((enemy, enemyIndex) => {
@@ -262,7 +264,7 @@ function animate() {
             let projectileDidCollide = projectileDetectCollision(projectile, enemy);
 
             if (projectileDidCollide) {
-                score += 100
+                score += 25
                 scoreEl.innerHTML = score
                 enemiesArr.splice(enemyIndex, 1)
                 projectilesArr.splice(projectileIndex, 1)
@@ -282,7 +284,7 @@ addEventListener("click", (event) => {
        y: Math.sin(angle) * 3 //Gets the velocity on the y axis.
    }
 
-   projectilesArr.push(new Projectile((w/2 + player.w/2), (h/2 + player.h/2), 5, "red", velocity))
+   projectilesArr.push(new Projectile((w/2 + player.w/2), (h/2 + player.h/2), 10, "red", velocity))
 })
 
 
@@ -294,11 +296,12 @@ function gameOver() {
     ctx.fillRect(0, 0, w, h)
     ctx.font = "50px sans-serif";
     ctx.fillStyle = "white"
-    ctx.fillText("GAME OVER", 600, 300)
+    ctx.fillText("FINE PARTITA", 600, 300)
     ctx.font = "35px sans-serif";
-    ctx.fillText(`Final Score: ${score}`, 643, 400)
+    ctx.fillText(`Final Score: ${score}`, 636, 400)
 }
 
 }
+
 
 
