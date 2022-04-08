@@ -28,7 +28,7 @@ const projectileImage = new Image();
 projectileImage.src = "Images/Tomatoe.svg"
 projectileImage.onload = function () {
     ctx.imageSmoothingEnabled = true;
-    ctx.drawImage(projectileImage, projectile.x, projectile.y, projectile.radius)
+    // ctx.drawImage(projectileImage, projectile.x, projectile.y, projectile.radius)
 }
 
 class Projectile {
@@ -118,8 +118,6 @@ let enemies = new Enemies();
 
 let enemiesArr = []
 
-console.log(enemiesArr)
-
 function spawnEnemies() {
     
     setInterval(() => {
@@ -175,7 +173,7 @@ function spawnEnemies() {
                     enemiesArr.push(new Enemies(x, y, 10, "black", velocity))
                 break;
         }
-    }, 3700)
+    }, 2600)
 }
 
 
@@ -247,6 +245,7 @@ function animate() {
 
     
     //Enemies
+    let lose = false
     enemiesArr.forEach((enemy, enemyIndex) => {
         enemy.draw();
         enemy.update();
@@ -255,7 +254,7 @@ function animate() {
         let playerDidCollide = playerDetectCollision(player, enemy)
         
         if (playerDidCollide === true) {
-            gameOver()
+            lose = true
         }
 
         //If projectiles and enemy collide, remove from screen
@@ -271,13 +270,16 @@ function animate() {
             }
         }) 
     })
+    if (lose === true) {
+        gameOver()
+    }
 }
 
 
 //Click Event
 addEventListener("click", (event) => {
-
-   const angle = Math.atan2(event.clientY - (h/2 + player.h/2), event.clientX - (w/2 + player.w/2)) //Provides the angle between where you click and the pojectiles center position
+    
+   const angle = Math.atan2(event.offsetY - (h/2 + player.h/2), event.offsetX - (w/2 + player.w/2)) //Provides the angle between where you click and the pojectiles center position
 
    const velocity = {
        x: Math.cos(angle)* 3, //Gets the velocity on the x axis.
@@ -291,14 +293,19 @@ addEventListener("click", (event) => {
 //Game Over
 function gameOver() {
     gameOn = false;
-    cancelAnimationFrame(game)
+    window.cancelAnimationFrame(game)
+    projectilesArr=[]
+    enemiesArr = []
+    ctx.clearRect(0, 0, w, h)
     ctx.fillStyle = "green";
     ctx.fillRect(0, 0, w, h)
     ctx.font = "50px sans-serif";
     ctx.fillStyle = "white"
     ctx.fillText("FINE PARTITA", 600, 300)
-    ctx.font = "35px sans-serif";
-    ctx.fillText(`Final Score: ${score}`, 636, 400)
+    ctx.font = "50px sans-serif";
+    ctx.fillText(`Final Score: ${score}`, 580, 400)
+    ctx.font = "50px sans-serif";
+    ctx.fillText("Click Start Button To Play Again", 445, 500)
 }
 
 }
